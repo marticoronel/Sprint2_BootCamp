@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPRINT 2</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600&family=Space+Grotesk:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="shortcut icon" href="./imagenes/favicon-32x32.png" type="">
+</head>
+
+
+<body>
+    <div class="main">
+        <div class="margen"> </div>
+        <div class="formulario">
+
+            <form class="form">
+                <label class="formulario__label" for="cardName">CARDHOLDER NAME</label>
+                <input class="formulario__input" type="text" id="cardName" placeholder="e.g. Jane Apples">
+
+                <label class="formulario__label" for="cardNumber">CARD NUMBER</label>
+                <input class="formulario__input" type="text" inputmode="numeric" minlength="16" maxlength="16"
+                    id="cardNumber" placeholder="e.g. 1234 4567 8910 1112">
+
+                <div class="flex-container">
+                    <div class="flex-containerIzq">
+                        <label class="formulario__label" for="expDate">EXP. DATE (MM/YY)</label>
+                        <div class="flex-containerMM-YY">
+                            <input class="formulario__input" type="text" maxlength="2" id="mm" placeholder="MM">
+                            <input class="formulario__input" type="text" id="yy" maxlength="2" placeholder="YY">
+                        </div>
+                    </div>
+
+                    <div class="flex-containerDer">
+                        <label class="formulario__label" for="cvcCode">CVC</label>
+                        <input class="formulario__input" type="password" minlength="3" maxlength="3" id="cvcCode"
+                            placeholder="CVC" />
+                    </div>
+                </div>
+                <button type="submit" class="formulario__btn">Confirm</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="tarjetas">
+        <div class="frontCard">
+            <img class="card-logo" src="./imagenes/card-logo.svg" alt="">
+            <img src="./imagenes/bg-card-front.png" alt="imagen del frente de la tarjeta">
+
+            <div class="cardInfo">
+                <p class="card-number"><span id="reflectedNumber">0000 0000 0000 0000</span></p>
+                <p class="cardholder-name"><span id="reflectedName">JANE APPLES</span></p>
+                <p class="exp-dateMm"><span id="reflectedDateMm">12</span></p>
+                <p class="dateBar">/</p>
+                <p class="exp-dateYy"><span id="reflectedDateYy">24</span></p>
+            </div>
+        </div>
+
+        <div class="backCard">
+            <img src="./imagenes/bg-card-back.png" alt="foto del reves de la tarjeta">
+            <p class="cvcCode"><span id="reflectedCvc">000</span></p>
+        </div>
+    </div>
+
+
+    <script>
+        
+        const sonNumeros = function (evento) {
+            return !isNaN(evento.key);
+        }
+
+        // NUMERO TARJETA //
+
+        const cardNumber = document.getElementById('cardNumber');
+        const reflectedNumber = document.getElementById('reflectedNumber');
+
+        cardNumber.onkeypress = sonNumeros
+
+        cardNumber.addEventListener('input', () => {
+            reflectedNumber.textContent = cardNumber.value;
+        });
+
+        // NOMBRE TARJETA //
+        const cardName = document.getElementById('cardName');
+        const reflectedName = document.getElementById('reflectedName');
+
+        cardName.addEventListener('input', () => {
+            reflectedName.textContent = cardName.value;
+        });
+
+        // FECHA DE VENCIMIENTO //
+        const mm = document.getElementById('mm');
+        const reflectedDateMm = document.getElementById('reflectedDateMm');
+
+        mm.addEventListener('input', () => {
+            reflectedDateMm.textContent = mm.value;
+        });
+
+        const yy = document.getElementById('yy');
+        const reflectedDateYy = document.getElementById('reflectedDateYy');
+
+        yy.addEventListener('input', () => {
+            reflectedDateYy.textContent = yy.value;
+        });
+
+        mm.onkeypress = sonNumeros
+        yy.onkeypress = sonNumeros
+
+        // CODIGO CVC //
+        const cvcCode = document.getElementById('cvcCode');
+        const reflectedCvc = document.getElementById('reflectedCvc');
+
+        cvcCode.addEventListener('input', () => {
+            reflectedCvc.textContent = cvcCode.value;
+        });
+
+        cvcCode.onkeypress = sonNumeros
+
+    </script>
+
+</body>
+
+</html>
